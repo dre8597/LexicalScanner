@@ -12,7 +12,7 @@ using namespace std;
 
 /* Variables */
 int charClass;
-char lexeme [100];
+char lexeme[100];
 char nextChar;
 int lexLen;
 int token;
@@ -21,8 +21,11 @@ FILE *in_fp, *fopen();
 
 /* Function declarations */
 void addChar();
+
 void getChar();
+
 void getNonBlank();
+
 int lex();
 
 /* Character classes */
@@ -159,8 +162,7 @@ void addChar() {
     if (lexLen <= 98) {
         lexeme[lexLen++] = nextChar;
         lexeme[lexLen] = 0;
-    }
-    else
+    } else
         printf("Error - lexeme is too long \n");
 }
 /*****************************************************/
@@ -172,8 +174,7 @@ void getChar() {
         else if (isdigit(nextChar))
             charClass = DIGIT;
         else charClass = UNKNOWN;
-    }
-    else
+    } else
         charClass = EOF;
 }
 /*****************************************************/
@@ -227,7 +228,8 @@ int lex() {
             lexeme[3] = 0;
             break;
 
-        default:break;
+        default:
+            break;
     } /* End of switch */
 
     printf("Next token is: %d, Next lexeme is %s\n",
@@ -258,27 +260,23 @@ void Parser::program() {
                 assign();
                 if (nextToken == RIGHT_BRACKET) {
                     lex();
-                }
-                else {
+                } else {
                     cout << "missing right bracket" << endl;
 
                     return;
                 }
 
-            }
-            else {
+            } else {
                 cout << "missing left bracket" << endl;
 
                 return;
             }
-        }
-        else {
+        } else {
             cout << "missing right parentheses" << endl;
 
             return;
         }
-    }
-    else {
+    } else {
         cout << "missing left parentheses" << endl;
 
         return;
@@ -309,8 +307,7 @@ void Parser::keyword() {
     if (lexeme[0] == 'i' && lexeme[1] == 'n' && lexeme[2] == 't' &&
         lexeme[3] == 0) {
         lex();
-    }
-    else {
+    } else {
         cout << "missing keyword" << endl;
 
         return;
@@ -323,25 +320,22 @@ void Parser::keyword() {
 
 void Parser::declare() {
     printf("Enter <declare>\n");
-    if(lexeme[0] == 'i' && lexeme[1] == 'n' && lexeme[2] == 't' &&
-       lexeme[3] == 0) {
+    if (lexeme[0] == 'i' && lexeme[1] == 'n' && lexeme[2] == 't' &&
+        lexeme[3] == 0) {
         lex();
         ident();
         if (nextToken == SEMICOLON) {
             lex();
 
-        }
-        else if (nextToken == COMMA) {
+        } else if (nextToken == COMMA) {
             lex();
             declarident();
-        }
-        else {
+        } else {
             cout << "missing a semicolon or comma" << endl;
 
             return;
         }
-    }
-    else {
+    } else {
         cout << "missing keyword" << endl;
 
         return;
@@ -360,14 +354,12 @@ void Parser::term() {
         expr();
         if (nextToken == RIGHT_PAREN) {
             lex();
-        }
-        else {
+        } else {
             cout << "missing right parenthese" << endl;
 
             return;
         }
-    }
-    else
+    } else
         ident();
 
     printf("Exit <term>\n");
@@ -393,13 +385,11 @@ void Parser::assign() {
         expr();
         if (nextToken == SEMICOLON) {
             lex();
-        }
-        else {
+        } else {
             cout << "missing semicolon" << endl;
             return;
         }
-    }
-    else {
+    } else {
         cout << "missing assignment operator" << endl;
         return;
     }
@@ -435,8 +425,7 @@ void Parser::ident() {
     printf("Enter <ident>\n");
     if (nextToken == IDENT) {
         lex();
-    }
-    else {
+    } else {
         cout << "missing identifier" << endl;
 
         return;
