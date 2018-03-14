@@ -1,0 +1,4 @@
+float ques()
+{   float x, y, z;
+    x +y -z;
+}

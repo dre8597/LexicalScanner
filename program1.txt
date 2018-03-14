@@ -1,0 +1,5 @@
+float text()
+{   float m, n, p;
+    m = n + m - p;
+    p = m - n;
+}
