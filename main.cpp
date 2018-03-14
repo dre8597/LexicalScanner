@@ -4,7 +4,7 @@
 //  main.cpp
 //  Lexical Scanner
 //
-//  Created by Demondre Livingston on 3/12/18.
+//  Created by Demondre Livingston Michaela Agee on 3/12/18.
 //  Copyright © 2018 Demondre Livingston. All rights reserved.
 using namespace std;
 
