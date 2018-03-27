@@ -24,6 +24,9 @@ public:
     void ident();
 
 
+    void program2();
+
+    void programm();
 };
 
 #endif /* Parser_hpp */
