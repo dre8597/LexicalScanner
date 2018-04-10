@@ -9,22 +9,26 @@
 //
 #include <cstdio>
 
-class Parser{
+class Parser {
 
 public:
 
     void program();
+
     void keyword();
+
     void declare();
-    void declarident();
+
     void assign();
+
     void expr();
+
     void term();
+
     void funcname();
+
     void ident();
 
-
-    void program2();
 
     void programm();
 };

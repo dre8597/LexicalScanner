@@ -1,4 +1,4 @@
-float ques()
-{   float x, y, z;
-    x +y -z;
+float text()
+{   float m, n, p;
+    n + m - p;
 }

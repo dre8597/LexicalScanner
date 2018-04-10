@@ -65,7 +65,7 @@ int main() {
         //lexical analyzer
         lex();
         //parser/syntax analyzer
-        parser.programm();
+        parser.program();
 
         cout << "The test program is correct" << endl << endl << endl <<
              "|||||||||||||||||||||||||||||||||||||||||||||||" << endl << endl << endl;
@@ -169,13 +169,17 @@ void addChar() {
 /* getChar - a function to get the next character of input and determine its character class */
 void getChar() {
     if ((nextChar = static_cast<char>(getc(in_fp))) != EOF) {
-        if (isalpha(nextChar))
+        if (isalpha(nextChar)) {
             charClass = LETTER;
-        else if (isdigit(nextChar))
+        } else if (isdigit(nextChar)) {
             charClass = DIGIT;
-        else charClass = UNKNOWN;
-    } else
+        } else {
+            charClass = UNKNOWN;
+        }
+    } else {
         charClass = EOF;
+    }
+
 }
 /*****************************************************/
 /* getNonBlank - a function to call getChar until it returns a non-whitespace character */
@@ -293,11 +297,12 @@ void Parser::program() {
  */
 
 void Parser::expr() {
+    lex();
+    ident();
 
-    term();
-    while (nextToken == ADD_OP || nextToken == SUB_OP) {
+    while (nextToken == ADD_OP || nextToken == SUB_OP ) {
         lex();
-        term();
+        ident();
     }
 
 }
@@ -368,8 +373,8 @@ void Parser::keyword() {
 
 void Parser::declare() {
 
-    if (lexeme[0] == 'i' && lexeme[1] == 'n' && lexeme[2] == 't' &&
-        lexeme[3] == 0) {
+    if (lexeme[0] == 'f' && lexeme[1] == 'l' && lexeme[2] == 'o' &&
+        lexeme[3] == 'a' && lexeme[4] == 't') {
         lex();
         ident();
         if (nextToken == SEMICOLON) {
@@ -377,6 +382,7 @@ void Parser::declare() {
 
         } else if (nextToken == COMMA) {
             lex();
+
         } else {
             cout << "missing a semicolon or comma" << endl;
 
@@ -416,6 +422,7 @@ void Parser::term() {
  <funcname> → <ident> */
 
 void Parser::funcname() {
+    lex();
 
     ident();
 
@@ -425,22 +432,14 @@ void Parser::funcname() {
  <assign> → <ident> = <expr>; */
 
 void Parser::assign() {
-
+    lex();
     ident();
+
+
     if (nextToken == ASSIGN_OP) {
         lex();
         expr();
-        if (nextToken == SEMICOLON) {
-            lex();
-        } else {
-            cout << "missing semicolon" << endl;
-            return;
-        }
-    } else {
-        cout << "missing assignment operator" << endl;
-        return;
     }
-
 }
 
 void Parser::ident() {
