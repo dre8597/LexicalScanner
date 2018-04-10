@@ -300,7 +300,7 @@ void Parser::expr() {
     lex();
     ident();
 
-    while (nextToken == ADD_OP || nextToken == SUB_OP ) {
+    while (nextToken == ADD_OP || nextToken == SUB_OP) {
         lex();
         ident();
     }
@@ -400,8 +400,7 @@ void Parser::declare() {
  <term> → <ident> | (<expr>) */
 
 void Parser::term() {
-
-
+    program();
     if (nextToken == LEFT_PAREN) {
         lex();
         expr();
@@ -434,8 +433,8 @@ void Parser::funcname() {
 void Parser::assign() {
     lex();
     ident();
-
-
+    declareident();
+    ident();
     if (nextToken == ASSIGN_OP) {
         lex();
         expr();
@@ -443,15 +442,26 @@ void Parser::assign() {
 }
 
 void Parser::ident() {
-
+    term();
     if (nextToken == IDENT) {
         lex();
     } else {
         cout << "missing identifier" << endl;
-
         return;
     }
 
+}
+
+void Parser::declareident() {
+    ident();
+    if (nextToken == COMMA) {
+        lex();
+        declareident();
+    } else if (nextToken == SEMICOLON) {
+        lex();
+    } else {
+        cout << "missing comma or semicolon" << endl;
+    }
 }
 
 

@@ -29,6 +29,7 @@ public:
 
     void ident();
 
+    void declareident();
 
     void programm();
 };
